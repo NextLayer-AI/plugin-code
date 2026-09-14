@@ -1,0 +1,16 @@
+{
+  "name": "code",
+  "version": "0.1.0",
+  "description": "Skills e auditoria da NextLayer da sua empresa, em qualquer conversa do Claude Code.",
+  "author": {
+    "name": "NextLayer"
+  },
+  "userConfig": {
+    "servidor": {
+      "type": "string",
+      "title": "Endereço do servidor NextLayer",
+      "description": "O endereço da NextLayer da sua empresa, o mesmo do navegador, sem barra no final (ex.: https://nextlayer.suaempresa.com.br).",
+      "required": true
+    }
+  }
+}

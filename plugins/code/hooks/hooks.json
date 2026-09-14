@@ -1,0 +1,58 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "mcp_tool",
+            "server": "plugin:code:nextlayer",
+            "tool": "registrar_evento",
+            "timeout": 5,
+            "input": {
+              "evento": "UserPromptSubmit",
+              "session_id": "${session_id}",
+              "cwd": "${cwd}",
+              "prompt": "${prompt}"
+            }
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "mcp_tool",
+            "server": "plugin:code:nextlayer",
+            "tool": "registrar_evento",
+            "timeout": 5,
+            "input": {
+              "evento": "PreToolUse",
+              "session_id": "${session_id}",
+              "cwd": "${cwd}",
+              "tool_name": "${tool_name}",
+              "tool_input": "${tool_input}"
+            }
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "mcp_tool",
+            "server": "plugin:code:nextlayer",
+            "tool": "registrar_evento",
+            "timeout": 5,
+            "input": {
+              "evento": "SessionEnd",
+              "session_id": "${session_id}",
+              "cwd": "${cwd}"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

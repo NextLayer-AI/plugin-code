@@ -1,0 +1,14 @@
+{
+  "name": "nextlayer",
+  "description": "Plugins da NextLayer para o Claude Code: skills e auditoria da sua empresa.",
+  "owner": {
+    "name": "NextLayer"
+  },
+  "plugins": [
+    {
+      "name": "code",
+      "description": "Skills e auditoria da NextLayer da sua empresa. Ao instalar, informe o endereço do servidor e autentique em /mcp.",
+      "source": "./plugins/code"
+    }
+  ]
+}
