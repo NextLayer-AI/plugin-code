@@ -39,6 +39,7 @@
     ],
     "SessionEnd": [
       {
+        "matcher": "clear",
         "hooks": [
           {
             "type": "mcp_tool",

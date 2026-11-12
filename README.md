@@ -71,7 +71,7 @@ Com managed settings, o plugin já chega habilitado e com o endereço preenchido
 |---|---|---|
 | Endereço | `plugins/code/.claude-plugin/plugin.json` | `userConfig.servidor`, pedido ao habilitar |
 | Servidor | `plugins/code/.mcp.json` | MCP remoto `${user_config.servidor}/mcp`; o login OAuth é do Claude Code |
-| Auditoria | `plugins/code/hooks/hooks.json` | hooks `mcp_tool` em `UserPromptSubmit`, `PreToolUse` e `SessionEnd` chamam `registrar_evento` |
+| Auditoria | `plugins/code/hooks/hooks.json` | hooks `mcp_tool` em `UserPromptSubmit`, `PreToolUse` e `SessionEnd` (só no `/clear`) chamam `registrar_evento` |
 | Skills | `plugins/code/skills/` | cascas que carregam a instrução vigente com `obter_skill`; `skills-da-empresa` alcança as criadas pela empresa |
 
 As quatro skills fixas (`planejamento`, `desenvolvimento`, `teste`, `seguranca`) são o catálogo de
@@ -98,6 +98,8 @@ dinâmico só com retorno em loopback, PKCE S256, refresh token rotativo) e as f
 
 - **Nada executa na máquina.** O servidor entrega dados (texto de skills); o hook só chama uma ferramenta dele.
 - **Sem fila local:** com o servidor fora do ar, os eventos desse período se perdem (decisão aceita no spike).
+- **Fim de sessão só no `/clear`.** Fechar o editor (`/exit`, Ctrl+C, Ctrl+D) não registra fim de sessão: quando
+  esse evento acontece, o editor já encerrou a conexão com o servidor, e o hook falharia com aviso no terminal.
 - **`registrar_evento` é visível ao modelo.** Para impedir auditoria forjada, negue a ferramenta ao
   modelo em `permissions.deny` (managed ou user settings); os hooks continuam registrando — a validar.
 - **Repositório público**, de propósito: é o que permite instalar numa máquina sem acesso ao GitHub
