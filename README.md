@@ -92,13 +92,17 @@ A plataforma NextLayer atende tudo isto no módulo `plugin-code`; quem opera pre
 
 O contrato que o servidor cumpre: OAuth 2.1 para cliente nativo (metadados RFC 8414/9728, registro
 dinâmico só com retorno em loopback, PKCE S256, refresh token rotativo) e as ferramentas MCP
-`listar_skills`, `obter_skill` e `registrar_evento`. Pessoa e empresa sempre saem do token.
+`listar_skills` e `obter_skill` (na lista que o editor entrega ao modelo) e `registrar_evento` (fora da
+lista, aceita só por chamada pelo nome, que é o que o hook faz). Pessoa e empresa sempre saem do token.
 
 ## Decisões e limites
 
 - **Nada executa na máquina.** O servidor entrega dados (texto de skills); o hook só chama uma ferramenta dele.
 - **Sem fila local:** com o servidor fora do ar, os eventos desse período se perdem (decisão aceita no spike).
-- **`registrar_evento` é visível ao modelo.** Para impedir auditoria forjada, negue a ferramenta ao
-  modelo em `permissions.deny` (managed ou user settings); os hooks continuam registrando — a validar.
+- **`registrar_evento` fica fora da lista de ferramentas.** O servidor não a mostra ao modelo do editor
+  (qualquer modelo) e as instruções dele não a citam; só o hook a chama, pelo nome, e os eventos
+  continuam entrando na Auditoria. Negar a ferramenta em `permissions.deny` no managed settings é
+  camada extra opcional. Limite que fica: quem tem o próprio token pode chamar `POST /mcp` direto e
+  gravar um evento, sempre em nome próprio.
 - **Repositório público**, de propósito: é o que permite instalar numa máquina sem acesso ao GitHub
   da NextLayer. Ele não carrega nada da empresa — só a configuração; o conteúdo vem do servidor dela.
